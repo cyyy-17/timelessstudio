@@ -835,6 +835,27 @@ app.put('/api/admin/change-credentials', requireAdmin, (req, res) => {
 // Static assets
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Explicit SEO & Verification Routes
+app.get('/sitemap.xml', (req, res) => {
+  res.setHeader('Content-Type', 'application/xml');
+  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+});
+
+app.get('/robots.txt', (req, res) => {
+  res.setHeader('Content-Type', 'text/plain');
+  res.sendFile(path.join(__dirname, 'public', 'robots.txt'));
+});
+
+app.get('/google:hash.html', (req, res) => {
+  const filename = `google${req.params.hash}.html`;
+  const filePath = path.join(__dirname, 'public', filename);
+  if (fs.existsSync(filePath)) {
+    res.setHeader('Content-Type', 'text/html');
+    return res.sendFile(filePath);
+  }
+  res.status(404).send('Not found');
+});
+
 // Specific routes
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
