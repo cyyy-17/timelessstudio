@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://timeless-studio-21.onrender.com/</loc>
+    <loc>https://timeless-studio.onrender.com/</loc>
     <lastmod>2026-10-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://timeless-studio-21.onrender.com/assets/hero-wedding.jpg</image:loc>
+      <image:loc>https://timeless-studio.onrender.com/assets/hero-wedding.jpg</image:loc>
       <image:title>Timeless Studio 21 Freelance Wedding Photography</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://timeless-studio-21.onrender.com/assets/debut-celebration.jpg</image:loc>
+      <image:loc>https://timeless-studio.onrender.com/assets/debut-celebration.jpg</image:loc>
       <image:title>Timeless Studio 21 Debut and Milestone Cinematography</image:title>
     </image:image>
   </url>

@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://timeless-studio-21.onrender.com/sitemap.xml
+Sitemap: https://timeless-studio.onrender.com/sitemap.xml
