@@ -1,0 +1,23 @@
+{
+  "name": "timeless",
+  "version": "1.0.0",
+  "description": "Timeless Studio 21 - Premium Business Website & Studio Operations Portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "timeless-studio",
+    "photography",
+    "batangas",
+    "photo-studio",
+    "express"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^2.5.0"
+  }
+}

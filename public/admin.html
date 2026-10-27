@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Operations & Inquiry Hub | Timeless Studio 21</title>
+  <link rel="icon" type="image/jpeg" href="/assets/timeless-logo.jpg">
+  
+  <!-- Google Fonts: Inter, Plus Jakarta Sans, Playfair Display (Matching Landing Page) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/admin.css?v=20261027g">
+</head>
+<body class="admin-body">
+
+  <!-- ========================================== -->
+  <!-- LOGIN & INITIAL SETUP SCREEN -->
+  <!-- ========================================== -->
+  <section class="login-screen" id="login-screen">
+    <!-- First-Time Master Setup Wizard (Shown when setupCompleted is false) -->
+    <div class="login-card" id="setup-card" hidden>
+      <div class="login-brand">
+        <img src="/assets/timeless-logo.jpg" alt="Timeless Studio 21" width="64" height="64" class="login-logo">
+        <div class="security-badge-banner">🛡️ Initial Security Initialization</div>
+        <h2>Create Master Account</h2>
+        <p>Set your confidential administrator credentials to secure the studio hub.</p>
+      </div>
+
+      <form id="admin-setup-form" class="login-form">
+        <div class="form-group">
+          <label for="setup-username">Master Username</label>
+          <input type="text" id="setup-username" placeholder="e.g. timeless_admin" required autocomplete="username" minlength="3">
+        </div>
+        <div class="form-group">
+          <label for="setup-password">Master Password</label>
+          <input type="password" id="setup-password" placeholder="Min. 8 characters (letters &amp; numbers)" required autocomplete="new-password" minlength="8">
+        </div>
+        <div class="form-group">
+          <label for="setup-confirm-password">Confirm Master Password</label>
+          <input type="password" id="setup-confirm-password" placeholder="Re-enter master password" required autocomplete="new-password" minlength="8">
+        </div>
+        <div class="password-req-hint">
+          <span>ℹ️ Must contain at least 8 characters with both letters &amp; numbers.</span>
+        </div>
+        <div id="setup-error" class="login-error-msg" hidden></div>
+        <button type="submit" class="btn-admin-primary" id="btn-setup-submit">Initialize &amp; Access Dashboard →</button>
+      </form>
+
+      <div class="login-footer">
+        <a href="/" target="_blank">← Return to Public Website</a>
+      </div>
+    </div>
+
+    <!-- Standard Login Card (Shown once initialized) -->
+    <div class="login-card" id="login-card">
+      <div class="login-brand">
+        <img src="/assets/timeless-logo.jpg" alt="Timeless Studio 21" width="64" height="64" class="login-logo">
+        <h2>Timeless Studio 21</h2>
+        <p>Freelance Operations &amp; Content Management Hub</p>
+      </div>
+
+      <form id="admin-login-form" class="login-form">
+        <div class="form-group">
+          <label for="admin-username-input">Master Username</label>
+          <input type="text" id="admin-username-input" name="username" placeholder="Enter username" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="admin-password-input">Master Password</label>
+          <input type="password" id="admin-password-input" name="password" placeholder="Enter master password" autocomplete="current-password" required>
+        </div>
+        <div id="login-error" class="login-error-msg" hidden></div>
+        <button type="submit" class="btn-admin-primary" id="btn-login-submit">Sign In to Operations Hub →</button>
+      </form>
+
+      <div class="login-footer">
+        <a href="/" target="_blank">← Return to Public Website</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- MAIN ADMIN DASHBOARD (Post-Login) -->
+  <!-- ========================================== -->
+  <div class="dashboard-layout" id="dashboard-layout" hidden>
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand-group">
+          <img src="/assets/timeless-logo.jpg" alt="Logo" width="36" height="36" class="sidebar-logo">
+          <div class="sidebar-brand-text">
+            <span class="sidebar-title">TIMELESS <span class="accent-number">STUDIO 21</span></span>
+            <span class="sidebar-subtitle">OPERATIONS &amp; CMS HUB</span>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-close" id="btn-sidebar-close" aria-label="Close Navigation Menu">✕</button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button type="button" class="sidebar-nav-item active" data-view="inquiries">
+          <span class="nav-icon">📋</span>
+          <span>Inquiries & Bookings</span>
+        </button>
+        <button type="button" class="sidebar-nav-item" data-view="packages">
+          <span class="nav-icon">🏷️</span>
+          <span>Packages & Pricing</span>
+        </button>
+        <button type="button" class="sidebar-nav-item" data-view="portfolio">
+          <span class="nav-icon">📸</span>
+          <span>Portfolio Showcase</span>
+        </button>
+        <button type="button" class="sidebar-nav-item" data-view="media">
+          <span class="nav-icon">🖼️</span>
+          <span>Media &amp; PC Uploads</span>
+        </button>
+        <button type="button" class="sidebar-nav-item" data-view="testimonials">
+          <span class="nav-icon">💬</span>
+          <span>Client Testimonials</span>
+        </button>
+        <button type="button" class="sidebar-nav-item" data-view="faqs">
+          <span class="nav-icon">❓</span>
+          <span>FAQ Management</span>
+        </button>
+        <button type="button" class="sidebar-nav-item" data-view="settings">
+          <span class="nav-icon">⚙️</span>
+          <span>Studio Profile &amp; Security</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="/" target="_blank" class="sidebar-link">🌐 View Live Website</a>
+        <button type="button" class="btn-logout" id="btn-logout">Sign Out ⎋</button>
+      </div>
+    </aside>
+
+    <!-- Mobile Backdrop Overlay for Clean Drawer Dismissal -->
+    <div class="admin-sidebar-backdrop" id="admin-sidebar-backdrop"></div>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+
+      <!-- Top Header Bar -->
+      <header class="admin-topbar">
+        <div class="topbar-left-wrap">
+          <button type="button" class="btn-admin-menu-toggle" id="btn-admin-menu-toggle" aria-label="Toggle Navigation">☰</button>
+          <div class="topbar-left">
+            <h1 id="topbar-page-title">Inquiries & Schedule Management</h1>
+            <span class="topbar-date" id="topbar-current-date"></span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn-admin-secondary" id="btn-refresh-data" title="Refresh current view">🔄 Refresh</button>
+          <button type="button" class="btn-admin-secondary" id="btn-export-csv">📥 Export CSV</button>
+          <button type="button" class="btn-admin-primary" id="btn-topbar-add">+ New Booking</button>
+        </div>
+      </header>
+
+      <!-- ========================================== -->
+      <!-- VIEW 1: INQUIRIES & BOOKINGS -->
+      <!-- ========================================== -->
+      <section class="admin-view" id="view-inquiries">
+
+        <!-- KPI Metric Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">Total Inquiries</span>
+            <span class="kpi-value" id="kpi-total">0</span>
+            <span class="kpi-sub">All-time customer requests</span>
+          </div>
+          <div class="kpi-card highlight-new">
+            <span class="kpi-label">New / Action Required</span>
+            <span class="kpi-value" id="kpi-new">0</span>
+            <span class="kpi-sub">Awaiting initial contact</span>
+          </div>
+          <div class="kpi-card highlight-confirmed">
+            <span class="kpi-label">Confirmed Bookings</span>
+            <span class="kpi-value" id="kpi-confirmed">0</span>
+            <span class="kpi-sub">Schedule locked & confirmed</span>
+          </div>
+          <div class="kpi-card highlight-pipeline">
+            <span class="kpi-label">Active Pipeline</span>
+            <span class="kpi-value" id="kpi-pipeline">₱0</span>
+            <span class="kpi-sub">Estimated potential revenue</span>
+          </div>
+        </div>
+
+        <!-- Filter Bar & Search -->
+        <div class="table-controls-bar">
+          <div class="status-tabs" id="status-tabs">
+            <button type="button" class="status-tab active" data-status="All">All Inquiries</button>
+            <button type="button" class="status-tab" data-status="New">New</button>
+            <button type="button" class="status-tab" data-status="Contacted">Contacted</button>
+            <button type="button" class="status-tab" data-status="Awaiting Customer">Awaiting Customer</button>
+            <button type="button" class="status-tab" data-status="Confirmed">Confirmed</button>
+            <button type="button" class="status-tab" data-status="Completed">Completed</button>
+            <button type="button" class="status-tab" data-status="Cancelled">Cancelled</button>
+          </div>
+
+          <div class="search-wrap">
+            <input type="text" id="inquiry-search-input" placeholder="Search client, ref code, or phone...">
+          </div>
+        </div>
+
+        <!-- Inquiries Table -->
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Reference Code</th>
+                <th>Client Name</th>
+                <th>Contact</th>
+                <th>Service / Tier</th>
+                <th>Event Date &amp; Venues</th>
+                <th>Status</th>
+                <th>Received</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inquiries-tbody">
+              <!-- Populated dynamically by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 2: PACKAGES & PRICING -->
+      <!-- ========================================== -->
+      <section class="admin-view" id="view-packages" hidden>
+        <div class="view-header-bar">
+          <div class="view-header-left">
+            <h2>Freelance Packages &amp; Pricing Catalog</h2>
+            <p>Add new service packages, update pricing rates, edit badges, or modify inclusions in real-time.</p>
+          </div>
+          <div class="view-header-actions">
+            <div class="category-filter-pills" id="pkg-category-filters">
+              <button type="button" class="filter-pill active" data-cat="All">All Categories</button>
+              <button type="button" class="filter-pill" data-cat="Weddings">Weddings</button>
+              <button type="button" class="filter-pill" data-cat="Debuts & Birthdays">Debuts & Birthdays</button>
+              <button type="button" class="filter-pill" data-cat="Portraits & Lifestyle">Portraits & Lifestyle</button>
+              <button type="button" class="filter-pill" data-cat="Christening & Events">Christening & Events</button>
+            </div>
+            <button type="button" class="btn-admin-primary" id="btn-add-new-package">+ Add New Package</button>
+          </div>
+        </div>
+
+        <div class="admin-packages-grid" id="admin-package-list">
+          <!-- Populated dynamically by admin.js -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 3: PORTFOLIO SHOWCASE -->
+      <!-- ========================================== -->
+      <section class="admin-view" id="view-portfolio" hidden>
+        <div class="view-header-bar">
+          <div class="view-header-left">
+            <h2>Portfolio Showcase &amp; Gallery</h2>
+            <p>Curate the photography and cinematography samples displayed on the public website showcase.</p>
+          </div>
+          <div class="view-header-actions">
+            <div class="category-filter-pills" id="portfolio-category-filters">
+              <button type="button" class="filter-pill active" data-cat="All">All Works</button>
+              <button type="button" class="filter-pill" data-cat="Weddings">Weddings</button>
+              <button type="button" class="filter-pill" data-cat="Debuts & Birthdays">Debuts</button>
+              <button type="button" class="filter-pill" data-cat="Portraits & Lifestyle">Portraits</button>
+              <button type="button" class="filter-pill" data-cat="Christening & Events">Events</button>
+            </div>
+            <button type="button" class="btn-admin-primary" id="btn-add-new-portfolio">+ Add Portfolio Work</button>
+          </div>
+        </div>
+
+        <div class="admin-portfolio-grid" id="admin-portfolio-list">
+          <!-- Populated dynamically by admin.js -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW: MEDIA LIBRARY & PC UPLOADS -->
+      <!-- ========================================== -->
+      <section class="admin-view" id="view-media" hidden>
+        <div class="view-header-bar">
+          <div class="view-header-left">
+            <h2>Studio Media Library &amp; PC Uploads</h2>
+            <p>Upload photos directly from your computer, manage photography assets, and link images across your website.</p>
+          </div>
+          <div class="view-header-actions">
+            <button type="button" class="btn-admin-primary" id="btn-trigger-media-upload">+ Upload Photos from PC</button>
+            <input type="file" id="media-page-upload-input" accept="image/*" multiple style="display: none;">
+          </div>
+        </div>
+
+        <!-- Interactive Drag & Drop Box -->
+        <div class="upload-dropzone" id="media-page-dropzone">
+          <div class="upload-dropzone-inner">
+            <span class="upload-drop-icon">📁</span>
+            <h3>Drag &amp; Drop Photos from your PC here</h3>
+            <p>or click to browse your computer (JPG, PNG, WEBP, AVIF up to 25MB each)</p>
+            <button type="button" class="btn-admin-secondary btn-sm" onclick="document.getElementById('media-page-upload-input').click()">
+              Choose Image Files
+            </button>
+          </div>
+          <div id="media-upload-progress" class="upload-progress-box" hidden>
+            <div class="progress-bar-track">
+              <div class="progress-bar-thumb" id="media-progress-bar"></div>
+            </div>
+            <span id="media-progress-text">Uploading photo to server...</span>
+          </div>
+        </div>
+
+        <!-- Filter / Search Row -->
+        <div class="media-controls-row">
+          <div class="category-filter-pills" id="media-source-filters">
+            <button type="button" class="filter-pill active" data-source="all">All Media (<span id="media-count-all">0</span>)</button>
+            <button type="button" class="filter-pill" data-source="upload">PC Uploads (<span id="media-count-uploads">0</span>)</button>
+            <button type="button" class="filter-pill" data-source="asset">Core Assets (<span id="media-count-assets">0</span>)</button>
+          </div>
+          <input type="text" id="media-search-input" placeholder="Search image filenames..." class="media-search-box">
+        </div>
+
+        <!-- Media Grid -->
+        <div class="admin-media-grid" id="admin-media-list">
+          <!-- Populated dynamically by admin.js -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 4: CLIENT TESTIMONIALS -->
+      <!-- ========================================== -->
+      <section class="admin-view" id="view-testimonials" hidden>
+        <div class="view-header-bar">
+          <div class="view-header-left">
+            <h2>Client Notes &amp; Testimonials</h2>
+            <p>Manage genuine client pull-quotes, reviews, and event feedback featured on the public website.</p>
+          </div>
+          <div class="view-header-actions">
+            <button type="button" class="btn-admin-primary" id="btn-add-new-testimonial">+ Add Client Review</button>
+          </div>
+        </div>
+
+        <div class="admin-testimonials-grid" id="admin-testimonials-list">
+          <!-- Populated dynamically by admin.js -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 5: FAQ MANAGEMENT -->
+      <!-- ========================================== -->
+      <section class="admin-view" id="view-faqs" hidden>
+        <div class="view-header-bar">
+          <div class="view-header-left">
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <p>Keep client inquiries, booking guidelines, and gear details clear and up to date.</p>
+          </div>
+          <div class="view-header-actions">
+            <button type="button" class="btn-admin-primary" id="btn-add-new-faq">+ Add New FAQ</button>
+          </div>
+        </div>
+
+        <div class="admin-faqs-list" id="admin-faqs-list">
+          <!-- Populated dynamically by admin.js -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 6: STUDIO PROFILE & SECURITY PIN -->
+      <!-- ========================================== -->
+      <section class="admin-view" id="view-settings" hidden>
+        <div class="view-header-bar">
+          <div class="view-header-left">
+            <h2>Studio Profile &amp; Security Settings</h2>
+            <p>Customize studio business information, contact details, social links, and update your staff PIN.</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Section 1: Studio Profile -->
+          <div class="settings-card">
+            <h3>🏢 Studio Profile &amp; Contact Information</h3>
+            <p class="settings-desc">These details are shown dynamically across the public website hero, navigation, and footer.</p>
+
+            <form id="settings-profile-form" class="settings-form">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="set-biz-name">Studio Business Name</label>
+                  <input type="text" id="set-biz-name" required>
+                </div>
+                <div class="form-group">
+                  <label for="set-primary-phone">Primary Contact Phone</label>
+                  <input type="text" id="set-primary-phone" required>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="set-secondary-phone">Secondary / Backup Phone</label>
+                  <input type="text" id="set-secondary-phone">
+                </div>
+                <div class="form-group">
+                  <label for="set-email">Official Inquiry Email</label>
+                  <input type="email" id="set-email">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="set-address">Official Studio Location (Barangay / Municipality)</label>
+                <input type="text" id="set-address" required>
+              </div>
+
+              <div class="form-group">
+                <label for="set-service-area">Service Coverage Areas</label>
+                <input type="text" id="set-service-area" required>
+              </div>
+
+              <div class="form-group">
+                <label for="set-tagline">Homepage Tagline (Hero Title)</label>
+                <input type="text" id="set-tagline" required>
+              </div>
+
+              <div class="form-group">
+                <label for="set-subtitle">Homepage Subtitle / Discipline Tag</label>
+                <input type="text" id="set-subtitle" required>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="set-fb-url">Facebook Page URL</label>
+                  <input type="url" id="set-fb-url">
+                </div>
+                <div class="form-group">
+                  <label for="set-messenger">Messenger Link (m.me/...)</label>
+                  <input type="url" id="set-messenger">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="set-hours">Operating Hours / Availability Note</label>
+                <input type="text" id="set-hours">
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="submit" class="btn-admin-primary" id="btn-save-settings">Save Studio Profile Changes</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Section 2: Master Administrator Credentials -->
+          <div class="settings-card">
+            <h3>🔐 Master Administrator Credentials</h3>
+            <p class="settings-desc">Update the master username and password required to access this administration portal.</p>
+
+            <form id="settings-credentials-form" class="settings-form">
+              <div class="form-group">
+                <label for="cred-current-password">Current Master Password *</label>
+                <input type="password" id="cred-current-password" placeholder="Enter current master password" required autocomplete="current-password">
+              </div>
+
+              <div class="form-group">
+                <label for="cred-new-username">Master Username</label>
+                <input type="text" id="cred-new-username" placeholder="Enter username" minlength="3" required autocomplete="username">
+              </div>
+
+              <div class="form-group">
+                <label for="cred-new-password">New Master Password *</label>
+                <input type="password" id="cred-new-password" placeholder="Min. 8 characters (letters &amp; numbers)" minlength="8" required autocomplete="new-password">
+              </div>
+
+              <div class="form-group">
+                <label for="cred-confirm-password">Confirm New Password *</label>
+                <input type="password" id="cred-confirm-password" placeholder="Re-enter new password" minlength="8" required autocomplete="new-password">
+              </div>
+
+              <div id="cred-change-status" class="settings-feedback-msg" hidden></div>
+
+              <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="submit" class="btn-admin-primary" id="btn-change-credentials">Update Master Credentials</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL 1: VIEW & EDIT INQUIRY / BOOKING -->
+  <!-- ========================================== -->
+  <dialog id="admin-inquiry-modal" class="admin-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <span class="ref-code-pill" id="modal-ref-code">REF-CODE</span>
+          <h2 id="modal-client-name" style="margin-top: 0.4rem;">Client Name</h2>
+        </div>
+        <button type="button" class="btn-modal-close" onclick="document.getElementById('admin-inquiry-modal').close()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="modal-inquiry-edit-form">
+          <div class="inquiry-detail-grid">
+            <div class="detail-field">
+              <span class="field-label">Contact Phone</span>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <input type="text" id="modal-edit-contact" class="input-inline" required>
+                <a id="modal-call-link" href="#" class="btn-admin-secondary btn-sm" target="_blank">📞 Call</a>
+              </div>
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Facebook Profile</span>
+              <input type="text" id="modal-edit-fb" class="input-inline">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Email Address</span>
+              <input type="email" id="modal-edit-email" class="input-inline">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Service Category</span>
+              <input type="text" id="modal-edit-category" class="input-inline">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Package Name</span>
+              <input type="text" id="modal-edit-package" class="input-inline">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Agreed / Quoted Price (PHP)</span>
+              <input type="number" id="modal-edit-price" class="input-inline">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Event Date</span>
+              <input type="date" id="modal-edit-date" class="input-inline">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Program Time / Hours</span>
+              <input type="text" id="modal-edit-time" class="input-inline" placeholder="e.g. 1:00 PM – 9:00 PM">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Preparation Venue / Hotel</span>
+              <input type="text" id="modal-edit-prep" class="input-inline" placeholder="Hotel or home address">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Ceremony Venue</span>
+              <input type="text" id="modal-edit-ceremony" class="input-inline" placeholder="Church or ceremony location">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Reception Venue</span>
+              <input type="text" id="modal-edit-reception" class="input-inline" placeholder="Ballroom, resort or hall">
+            </div>
+            <div class="detail-field">
+              <span class="field-label">Estimated Guest Count</span>
+              <input type="text" id="modal-edit-guests" class="input-inline">
+            </div>
+          </div>
+
+          <div class="detail-notes-section" style="margin-top: 1rem;">
+            <div class="form-group">
+              <label>Client's Original Notes / Requests</label>
+              <div class="client-notes-box" id="modal-client-notes">None</div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="modal-status-select">Schedule / Workflow Status</label>
+                <select id="modal-status-select" class="form-select">
+                  <option value="New">New (Action Required)</option>
+                  <option value="Contacted">Contacted / Discussion in Progress</option>
+                  <option value="Awaiting Customer">Awaiting Customer Reply</option>
+                  <option value="Confirmed">Confirmed Booking (Locked)</option>
+                  <option value="Completed">Completed Milestone</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="modal-internal-notes">Internal Production Notes (Private Staff Only)</label>
+                <textarea id="modal-internal-notes" rows="3" placeholder="Log payment status, crew assignments, SDE preferences..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--admin-border);">
+            <button type="button" class="btn-danger" id="btn-delete-inquiry">🗑️ Delete Inquiry</button>
+            <div style="display: flex; gap: 0.75rem;">
+              <button type="button" class="btn-admin-secondary" onclick="document.getElementById('admin-inquiry-modal').close()">Cancel</button>
+              <button type="submit" class="btn-admin-primary" id="btn-save-inquiry-changes">Save Booking Details</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========================================== -->
+  <!-- MODAL 2: ADD MANUAL BOOKING / INQUIRY -->
+  <!-- ========================================== -->
+  <dialog id="admin-new-inquiry-modal" class="admin-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h2>+ Log New Booking / Phone Inquiry</h2>
+          <p style="font-size: 0.85rem; color: var(--admin-muted);">Add a booking received via phone call, walk-in consultation, or direct FB message.</p>
+        </div>
+        <button type="button" class="btn-modal-close" onclick="document.getElementById('admin-new-inquiry-modal').close()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="new-inquiry-form">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="new-inq-client">Client Name *</label>
+              <input type="text" id="new-inq-client" placeholder="e.g. Maria Santos" required>
+            </div>
+            <div class="form-group">
+              <label for="new-inq-contact">Contact Phone Number *</label>
+              <input type="text" id="new-inq-contact" placeholder="0997 123 4567" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="new-inq-fb">Facebook Name / Profile</label>
+              <input type="text" id="new-inq-fb" placeholder="e.g. Maria Santos">
+            </div>
+            <div class="form-group">
+              <label for="new-inq-email">Email Address</label>
+              <input type="email" id="new-inq-email" placeholder="client@email.com">
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="new-inq-category">Category *</label>
+              <select id="new-inq-category" required>
+                <option value="Weddings">Weddings</option>
+                <option value="Debuts & Birthdays">Debuts & Birthdays</option>
+                <option value="Portraits & Lifestyle">Portraits & Lifestyle</option>
+                <option value="Christening & Events">Christening & Events</option>
+                <option value="Custom Event">Custom Event</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="new-inq-package">Package / Tier</label>
+              <input type="text" id="new-inq-package" placeholder="e.g. Elegance Gold Wedding">
+            </div>
+            <div class="form-group">
+              <label for="new-inq-price">Agreed Price (PHP)</label>
+              <input type="number" id="new-inq-price" placeholder="32000" min="0" step="50">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="new-inq-date">Event Date</label>
+              <input type="date" id="new-inq-date">
+            </div>
+            <div class="form-group">
+              <label for="new-inq-time">Program Time</label>
+              <input type="text" id="new-inq-time" placeholder="e.g. 2:00 PM – 10:00 PM">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="new-inq-ceremony">Ceremony / Church Venue</label>
+              <input type="text" id="new-inq-ceremony" placeholder="e.g. San Guillermo Parish, Lipa">
+            </div>
+            <div class="form-group">
+              <label for="new-inq-reception">Reception Venue</label>
+              <input type="text" id="new-inq-reception" placeholder="e.g. The Farm at San Benito">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="new-inq-status">Initial Status</label>
+              <select id="new-inq-status">
+                <option value="New">New</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Confirmed">Confirmed Booking</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="new-inq-prep">Preparation Location</label>
+              <input type="text" id="new-inq-prep" placeholder="Hotel / Bridal Suite">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="new-inq-notes">Notes / Scope Summary</label>
+            <textarea id="new-inq-notes" rows="2" placeholder="Enter special requests, drone coverage notes, or payment terms..."></textarea>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+            <button type="button" class="btn-admin-secondary" onclick="document.getElementById('admin-new-inquiry-modal').close()">Cancel</button>
+            <button type="submit" class="btn-admin-primary">Create Booking Record</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========================================== -->
+  <!-- MODAL 3: ADD / EDIT PACKAGE -->
+  <!-- ========================================== -->
+  <dialog id="admin-package-modal" class="admin-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-pkg-title">Edit Package Details</h2>
+        <button type="button" class="btn-modal-close" onclick="document.getElementById('admin-package-modal').close()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="pkg-edit-form">
+          <input type="hidden" id="edit-pkg-id">
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="edit-pkg-category">Category *</label>
+              <select id="edit-pkg-category" required>
+                <option value="Weddings">Weddings</option>
+                <option value="Debuts & Birthdays">Debuts & Birthdays</option>
+                <option value="Portraits & Lifestyle">Portraits & Lifestyle</option>
+                <option value="Christening & Events">Christening & Events</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="edit-pkg-name">Package Name *</label>
+              <input type="text" id="edit-pkg-name" required placeholder="e.g. Elegance Gold Wedding">
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="edit-pkg-price">Package Price (PHP) *</label>
+              <input type="number" id="edit-pkg-price" required min="0" step="50" placeholder="32000">
+            </div>
+            <div class="form-group">
+              <label for="edit-pkg-badge">Badge (e.g. SIGNATURE SDE, MOST POPULAR)</label>
+              <input type="text" id="edit-pkg-badge" placeholder="MOST POPULAR">
+            </div>
+            <div class="form-group">
+              <label for="edit-pkg-sort">Sort Order (Lower appears first)</label>
+              <input type="number" id="edit-pkg-sort" value="1" min="0">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-pkg-desc">Short Editorial Description</label>
+            <textarea id="edit-pkg-desc" rows="2" placeholder="Brief summary of what this tier provides..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-pkg-inclusions">Deliverables &amp; Inclusions (one per line)</label>
+            <textarea id="edit-pkg-inclusions" rows="6" placeholder="Full Day Photo & Video Coverage&#10;1 Senior Master Photographer + 1 Cinematographer&#10;Same-Day Edit (SDE) Wedding Video&#10;Flush-Mount Leatherette Storybook Album"></textarea>
+          </div>
+
+          <div class="form-row-2">
+            <label class="checkbox-label">
+              <input type="checkbox" id="edit-pkg-featured">
+              <span>Featured Package (Highlighted on Public Cards)</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="edit-pkg-active" checked>
+              <span>Active &amp; Visible on Public Website</span>
+            </label>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+            <button type="button" class="btn-admin-secondary" onclick="document.getElementById('admin-package-modal').close()">Cancel</button>
+            <button type="submit" class="btn-admin-primary">Save Package</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========================================== -->
+  <!-- MODAL 4: ADD / EDIT PORTFOLIO WORK -->
+  <!-- ========================================== -->
+  <dialog id="admin-portfolio-modal" class="admin-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-portfolio-title">Add / Edit Portfolio Work</h2>
+        <button type="button" class="btn-modal-close" onclick="document.getElementById('admin-portfolio-modal').close()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="portfolio-edit-form">
+          <input type="hidden" id="edit-port-id">
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="edit-port-category">Category *</label>
+              <select id="edit-port-category" required>
+                <option value="Weddings">Weddings</option>
+                <option value="Debuts & Birthdays">Debuts & Birthdays</option>
+                <option value="Portraits & Lifestyle">Portraits & Lifestyle</option>
+                <option value="Christening & Events">Christening & Events</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="edit-port-title">Work Title *</label>
+              <input type="text" id="edit-port-title" required placeholder="e.g. Romantic Coastal Vows">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="edit-port-subtitle">Subtitle / Location</label>
+              <input type="text" id="edit-port-subtitle" placeholder="e.g. Batangas Coastline On-Location Ceremony">
+            </div>
+            <div class="form-group">
+              <label for="edit-port-sort">Sort Order</label>
+              <input type="number" id="edit-port-sort" value="1" min="0">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Portfolio Image (Upload from PC or Select from Library) *</label>
+
+            <!-- Dropzone inside modal -->
+            <div class="upload-dropzone upload-dropzone-compact" id="port-modal-dropzone">
+              <div class="upload-dropzone-inner">
+                <span style="font-size: 1.8rem; margin-bottom: 0.2rem;">📸</span>
+                <p style="font-size: 0.85rem; margin-bottom: 0.4rem;"><strong>Drag &amp; drop an image from your PC</strong> or browse files</p>
+                <input type="file" id="port-modal-file-input" accept="image/*" style="display: none;">
+                <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                  <button type="button" class="btn-admin-primary btn-sm" onclick="document.getElementById('port-modal-file-input').click()">
+                    📁 Browse Image from PC
+                  </button>
+                  <button type="button" class="btn-admin-secondary btn-sm" id="btn-port-open-picker">
+                    🖼️ Pick from Media Library
+                  </button>
+                </div>
+              </div>
+              <div id="port-upload-progress" class="upload-progress-box" hidden>
+                <div class="progress-bar-track">
+                  <div class="progress-bar-thumb" style="width: 100%;"></div>
+                </div>
+                <span>Uploading image from PC...</span>
+              </div>
+            </div>
+
+            <!-- Preview Box -->
+            <div class="image-preview-card" id="port-preview-card" style="display: none;">
+              <div class="preview-thumb-frame">
+                <img id="port-preview-img" src="" alt="Selected Image">
+              </div>
+              <div class="preview-info-col">
+                <span class="preview-url-text" id="port-preview-url">/uploads/...</span>
+                <button type="button" class="btn-admin-secondary btn-sm" id="btn-port-clear-img">✕ Replace Image</button>
+              </div>
+            </div>
+
+            <input type="hidden" id="edit-port-img" required>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="edit-port-featured" checked>
+              <span>Featured on Homepage Showcase</span>
+            </label>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+            <button type="button" class="btn-admin-secondary" onclick="document.getElementById('admin-portfolio-modal').close()">Cancel</button>
+            <button type="submit" class="btn-admin-primary">Save Portfolio Work</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========================================== -->
+  <!-- MODAL 5: ADD / EDIT TESTIMONIAL -->
+  <!-- ========================================== -->
+  <dialog id="admin-testimonial-modal" class="admin-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-testimonial-title">Add / Edit Client Note</h2>
+        <button type="button" class="btn-modal-close" onclick="document.getElementById('admin-testimonial-modal').close()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="testimonial-edit-form">
+          <input type="hidden" id="edit-test-id">
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="edit-test-name">Client Name *</label>
+              <input type="text" id="edit-test-name" required placeholder="e.g. Maria & Joshua L.">
+            </div>
+            <div class="form-group">
+              <label for="edit-test-event">Event Type *</label>
+              <input type="text" id="edit-test-event" required placeholder="e.g. Wedding Coverage">
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="edit-test-location">Location / Venue *</label>
+              <input type="text" id="edit-test-location" required placeholder="e.g. The Farm at San Benito, Lipa">
+            </div>
+            <div class="form-group">
+              <label for="edit-test-rating">Star Rating (1–5)</label>
+              <select id="edit-test-rating">
+                <option value="5">★★★★★ (5 Stars)</option>
+                <option value="4">★★★★☆ (4 Stars)</option>
+                <option value="3">★★★☆☆ (3 Stars)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="edit-test-sort">Sort Order</label>
+              <input type="number" id="edit-test-sort" value="1" min="0">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-test-quote">Testimonial Quote *</label>
+            <textarea id="edit-test-quote" rows="4" required placeholder="Enter the client feedback quote..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="edit-test-active" checked>
+              <span>Active &amp; Visible on Public Website</span>
+            </label>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+            <button type="button" class="btn-admin-secondary" onclick="document.getElementById('admin-testimonial-modal').close()">Cancel</button>
+            <button type="submit" class="btn-admin-primary">Save Testimonial</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========================================== -->
+  <!-- MODAL 6: ADD / EDIT FAQ -->
+  <!-- ========================================== -->
+  <dialog id="admin-faq-modal" class="admin-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-faq-title">Add / Edit FAQ Item</h2>
+        <button type="button" class="btn-modal-close" onclick="document.getElementById('admin-faq-modal').close()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="faq-edit-form">
+          <input type="hidden" id="edit-faq-id">
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="edit-faq-category">Category *</label>
+              <input type="text" id="edit-faq-category" required placeholder="e.g. Operations & Location">
+            </div>
+            <div class="form-group">
+              <label for="edit-faq-sort">Sort Order</label>
+              <input type="number" id="edit-faq-sort" value="1" min="0">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-faq-question">Question *</label>
+            <input type="text" id="edit-faq-question" required placeholder="e.g. How far in advance should we inquire?">
+          </div>
+
+          <div class="form-group">
+            <label for="edit-faq-answer">Answer *</label>
+            <textarea id="edit-faq-answer" rows="4" required placeholder="Detailed, transparent answer for clients..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="edit-faq-active" checked>
+              <span>Active on Public Website</span>
+            </label>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+            <button type="button" class="btn-admin-secondary" onclick="document.getElementById('admin-faq-modal').close()">Cancel</button>
+            <button type="submit" class="btn-admin-primary">Save FAQ</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========================================== -->
+  <!-- MODAL: MEDIA PICKER -->
+  <!-- ========================================== -->
+  <dialog id="admin-media-picker-modal" class="admin-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h2>Select Photo from Media Library</h2>
+          <p style="font-size: 0.82rem; color: var(--admin-muted);">Click any photo to select it, or upload a new photo directly from your PC.</p>
+        </div>
+        <button type="button" class="btn-modal-close" onclick="document.getElementById('admin-media-picker-modal').close()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap;">
+          <input type="text" id="picker-search-input" placeholder="Search filenames..." style="flex: 1; min-width: 200px; margin-bottom: 0;">
+          <button type="button" class="btn-admin-primary btn-sm" onclick="document.getElementById('picker-file-input').click()">+ Upload from PC</button>
+          <input type="file" id="picker-file-input" accept="image/*" style="display: none;">
+        </div>
+        <div class="media-picker-grid" id="media-picker-grid">
+          <!-- Populated by admin.js -->
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification Container -->
+  <div id="admin-toast-container" class="admin-toast-container"></div>
+
+  <script src="/admin.js?v=20261027d"></script>
+</body>
+</html>
